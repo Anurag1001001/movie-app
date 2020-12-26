@@ -11,3 +11,6 @@ export default function movies(state=[], action){
     }
     return state;
 }
+
+// there are some abilities 'store' give us and i.e 
+// setState, Read the state, Update the state, listen to the state changes(subscribe)

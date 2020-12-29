@@ -5,9 +5,19 @@
 // reducers has to return something whether it could be a new state or something else
 
 import { ADD_MOVIES } from '../actions/index';
-export default function movies(state=[], action){
+
+const initialMovieState = {
+    list: [],
+    favourite: []
+}
+
+
+export default function movies(state = initialMovieState, action){
     if(action.type === ADD_MOVIES){
-        return action.movies;
+        return {
+            ...state,
+            list: action.movies
+        }
     }
     return state;
 }

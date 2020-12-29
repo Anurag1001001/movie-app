@@ -5,6 +5,7 @@ import React from 'react';
 import {data} from '../data';
 import Navbar from './Navbar';
 import MovieCard from './MovieCard';
+import {addMovies} from '../actions';
 
 
 class App extends React.Component{
@@ -18,12 +19,8 @@ class App extends React.Component{
       // we shouldn't use forceUpdate() in our application, just for the understanding purpose we did this 
       this.forceUpdate();
     })
-
     // dispatch action
-    store.dispatch({
-      type: 'ADD_MOVIES',
-      movies: data
-    });
+    store.dispatch(addMovies(data));
     console.log('state', this.props.store.getState());
   }
   render(){

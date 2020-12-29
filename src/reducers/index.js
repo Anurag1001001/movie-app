@@ -4,22 +4,44 @@
 
 // reducers has to return something whether it could be a new state or something else
 
-import { ADD_MOVIES } from '../actions/index';
+import { ADD_MOVIES,ADD_FAVOURITE, UN_FAVOURITE } from '../actions';
 
 const initialMovieState = {
     list: [],
-    favourite: []
+    favourites: []
 }
 
 
 export default function movies(state = initialMovieState, action){
-    if(action.type === ADD_MOVIES){
-        return {
-            ...state,
-            list: action.movies
-        }
+    // if(action.type === ADD_MOVIES){
+    //     return {
+    //         ...state,
+    //         list: action.movies
+    //     }
+    // }
+    // return state;
+
+    //  In React community we don't rely on if else case idealy, we prefer switch case instead, although we can use if else as well but we prefer switch case
+
+    switch (action.type) {
+        case ADD_MOVIES:
+            return {
+                ...state,
+                list: action.movies
+            }
+        case ADD_FAVOURITE:
+            return {
+                ...state,
+                favourites:[action.movie, ...state.favourites]
+            }
+        case UN_FAVOURITE:
+            return{
+                ...state,
+                favourites: [state.favourites.slice(0,action.index), state.favourites.slice(action.index+1)]
+            }
+        default:
+            return state
     }
-    return state;
 }
 
 // there are some abilities 'store' give us and i.e 

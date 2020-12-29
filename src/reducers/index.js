@@ -4,11 +4,12 @@
 
 // reducers has to return something whether it could be a new state or something else
 
-import { ADD_MOVIES,ADD_FAVOURITE, UN_FAVOURITE } from '../actions';
+import { ADD_MOVIES,ADD_FAVOURITE, UN_FAVOURITE,SHOW_FAVOURITE } from '../actions';
 
 const initialMovieState = {
     list: [],
-    favourites: []
+    favourites: [],
+    showFavourite: false
 }
 
 
@@ -35,9 +36,17 @@ export default function movies(state = initialMovieState, action){
                 favourites:[action.movie, ...state.favourites]
             }
         case UN_FAVOURITE:
+            const filteredArray = state.favourites.filter(
+                movie => movie.Title !== action.movie.Title
+            );
             return{
                 ...state,
-                favourites: [state.favourites.slice(0,action.index), state.favourites.slice(action.index+1)]
+                favourites: filteredArray
+            }
+        case SHOW_FAVOURITE:
+            return{
+                ...state,
+                showFavourite: action.val
             }
         default:
             return state

@@ -4,20 +4,19 @@ import { addFavourite,unFavourite } from '../actions';
 export default class MovieCard extends React.Component {
     handleFavouriteClick = () =>{
        const {movie} = this.props;
-       this.props.store.dispatch(addFavourite(movie)); 
+       this.props.dispatch(addFavourite(movie)); 
 
     }
-    handleUnFavouriteClick = (movie) =>{
-        const {favourites} = this.props.store.getState();
-        const index = favourites.indexOf(movie);
-        this.props.store.dispatch(unFavourite(index));
+    handleUnFavouriteClick = () =>{
+        const {movie} = this.props;
+        this.props.dispatch(unFavourite(movie));
     }
     render(){
         const { movie, isFavourite } =  this.props;        
         return (
             <div className= 'movie-card'>
                 <div className="left">
-                    <img alt='movie-poster' src='{movie.Poster' />
+                    <img alt='movie-poster' src='{movie.Poster}' />
                 </div>
                 <div className="right">
                     <div className="title">{movie.Title}</div>
@@ -26,7 +25,7 @@ export default class MovieCard extends React.Component {
                         <div className="rating">{movie.imdRating}</div>
                         {
                             isFavourite
-                            ? <button className="unfavourite-btn" onClick = {this.handleUnFavouriteClick(movie)}>unfavourite</button>
+                            ? <button className="unfavourite-btn" onClick = {this.handleUnFavouriteClick}>unfavourite</button>
                             : <button className="favourite-btn" onClick = {this.handleFavouriteClick}>Favourite</button>
                         }
 

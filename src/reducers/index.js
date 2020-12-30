@@ -79,10 +79,19 @@ const initialRootReducer = {
 // you can do console.log inside these reducer and check yourself.
 
 
-export default function rootReducer (state = initialRootReducer, action){
-    return{
-        movies: movies(state.movies, action),
-        search: search(state.search, action)
-    }
-}
+// export default function rootReducer (state = initialRootReducer, action){
+//     return{
+//         movies: movies(state.movies, action),
+//         search: search(state.search, action)
+//     }
+// }
 
+//  going to use inbuilt combine reducer and we just need to pass the reducer.
+
+ export default combineReducers({
+    //  combineReducer is smart enough i mean we don't need to write state.movies like we hardcoded this 
+    movies: movies,
+    search: search
+    //  we can use shorthand of this means that if reducers name is same as property name's  then we can do somthing like this
+    // movies, search that's it, we can avoid writing like this movies: movies, search: search
+});

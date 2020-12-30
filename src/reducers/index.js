@@ -4,6 +4,13 @@
 
 // reducers has to return something whether it could be a new state or something else
 
+// there are some abilities 'store' give us and i.e 
+// setState, Read the state, Update the state, listen to the state changes(subscribe)
+
+
+import {combineReducers} from 'redux'; 
+
+//  we can't have multiple default export in single file 
 import { ADD_MOVIES,ADD_FAVOURITE, UN_FAVOURITE,SHOW_FAVOURITE } from '../actions';
 
 const initialMovieState = {
@@ -13,7 +20,7 @@ const initialMovieState = {
 }
 
 
-export default function movies(state = initialMovieState, action){
+export function movies(state = initialMovieState, action){
     // if(action.type === ADD_MOVIES){
     //     return {
     //         ...state,
@@ -53,5 +60,29 @@ export default function movies(state = initialMovieState, action){
     }
 }
 
-// there are some abilities 'store' give us and i.e 
-// setState, Read the state, Update the state, listen to the state changes(subscribe)
+const initialSearchState = {
+    result: {}
+};
+
+export function search (state = initialSearchState, action){
+    // console.log("SEARCH REDUCER");
+    return state;
+}
+
+const initialRootReducer = {
+    movies: initialMovieState,
+    search: initialSearchState
+}
+
+
+// when the dispatch() called then rootReducer will be called automatically and both reducer(movie and search) reducer will be called.
+// you can do console.log inside these reducer and check yourself.
+
+
+export default function rootReducer (state = initialRootReducer, action){
+    return{
+        movies: movies(state.movies, action),
+        search: search(state.search, action)
+    }
+}
+

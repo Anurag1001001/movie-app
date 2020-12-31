@@ -95,3 +95,9 @@ const initialRootReducer = {
     //  we can use shorthand of this means that if reducers name is same as property name's  then we can do somthing like this
     // movies, search that's it, we can avoid writing like this movies: movies, search: search
 });
+
+
+
+//  Middleware is piece of code that will run after we've dispatched the action and before that action reaches to reducers
+
+//  So this middleware get this action as the argument and now this middleware can do pretty much anything , like it can modify the action, remove something from the action object, add something to the action object or anything like that

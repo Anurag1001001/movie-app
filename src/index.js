@@ -23,7 +23,7 @@ const logger = function({dispatch, getState}){
   return function(next) {
     return function(action){
       //  here i can write middleware code 
-      console.log('ACTION_TYPE =', action.type);
+      console.log('ACTION_TYPE =', action.type, );
       next(action);
 
     }

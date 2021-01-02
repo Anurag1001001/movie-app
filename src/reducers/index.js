@@ -11,7 +11,13 @@
 import {combineReducers} from 'redux'; 
 
 //  we can't have multiple default export in single file 
-import { ADD_MOVIES,ADD_FAVOURITE, UN_FAVOURITE,SHOW_FAVOURITE } from '../actions';
+import { ADD_MOVIES,
+        ADD_FAVOURITE,
+        UN_FAVOURITE,
+        SHOW_FAVOURITE,
+        ADD_SEARCH_RESULT
+    }
+    from '../actions';
 
 const initialMovieState = {
     list: [],
@@ -61,11 +67,25 @@ export function movies(state = initialMovieState, action){
 }
 
 const initialSearchState = {
-    result: {}
+    result: {},
+    showSearchResults: false
 };
 
 export function search (state = initialSearchState, action){
     // console.log("SEARCH REDUCER");
+    switch (action.type) {
+        case ADD_SEARCH_RESULT:
+            return{ 
+            ...state,
+            result : action.movie,
+            showSearchResults: true
+            }
+            
+            
+    
+        default:
+            return state
+    }
     return state;
 }
 

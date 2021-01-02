@@ -39,13 +39,13 @@ class App extends React.Component{
     this.props.store.dispatch(showFavourite(val));
   }
   render(){
-    const {movies} = this.props.store.getState(); // {movies: movies(), search: search()}
+    const {movies, search} = this.props.store.getState(); // {movies: movies(), search: search()}
     const {list, favourites, showFavourite} = movies;
     console.log('RENDER', this.props.store.getState());
     const showMovie = showFavourite ? favourites : list ;
     return (
       <div className= 'App'>
-        <Navbar />
+        <Navbar dispatch={this.props.store.dispatch} search={search} />
         <div className="main">
           <div className="tabs">
             <div className= {`tab ${showFavourite ? '' : 'active-tabs'}`} onClick = {() => this.onChangeTab(false)}>Movies</div>

@@ -6,6 +6,8 @@ import {data} from '../data';
 import Navbar from './Navbar';
 import MovieCard from './MovieCard';
 import {addMovies, showFavourite} from '../actions';
+import {storeContext} from '../index';
+console.log('storeContext');
 
 
 class App extends React.Component{
@@ -43,9 +45,10 @@ class App extends React.Component{
     const {list, favourites, showFavourite} = movies;
     console.log('RENDER', this.props.store.getState());
     const showMovie = showFavourite ? favourites : list ;
+    
     return (
       <div className= 'App'>
-        <Navbar dispatch={this.props.store.dispatch} search={search} />
+        <Navbar search={search} />
         <div className="main">
           <div className="tabs">
             <div className= {`tab ${showFavourite ? '' : 'active-tabs'}`} onClick = {() => this.onChangeTab(false)}>Movies</div>
@@ -66,4 +69,16 @@ class App extends React.Component{
   }
 }
 
-export default App;
+
+class AppWrapper extends React.Component{
+  render(){
+    return (
+      <storeContext.Consumer>
+        {(store) => <App store ={store} />}
+      </storeContext.Consumer>
+    )
+  }
+  
+}
+
+export default AppWrapper;

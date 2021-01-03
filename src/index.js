@@ -1,6 +1,6 @@
 // Package import should be in the top
 
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 
@@ -63,6 +63,19 @@ const thunk = ({dispatch, getState}) => (next) => (action) =>{
 
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 console.log('store',  store);
+
+const storeContext = createContext();
+
+class Provider extends React.Component{
+  render(){
+    const {store} = this.props;
+    return <storeContext.Provider value = {store}>
+      {/* I want to render everything b/w Provider or you can say all the children of Provider i'll call them here */}
+      {this.props.children}
+    </storeContext.Provider>
+  }
+  
+}
 // console.log('Before state',  store.getState());
 
 // store.dispatch({
@@ -74,11 +87,13 @@ console.log('store',  store);
 
 
 
-
 ReactDOM.render(
   <React.StrictMode>
-    <App store={store} />
+    <Provider store={store}>
+      {/* Why i did like this ? so that App and all it desendant get the access of store */}
+      <App/>
+      {/* Now anything b/w Provider is the children of Provider class and 'store' will be available to all the desendant */}
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
-

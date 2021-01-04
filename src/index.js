@@ -60,7 +60,7 @@ const thunk = ({dispatch, getState}) => (next) => (action) =>{
 
 
 
-
+// createStore krne k baad redux internally rootReducer ko call krta h.
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 console.log('store',  store);
 

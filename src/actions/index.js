@@ -16,6 +16,8 @@ export const ADD_SEARCH_RESULT = 'ADD_SEARCH_RESULT'
 
 
 // One thing we should know that our Action creator generally synchronous and they return a particular object
+// Action creator basically has two stuff, type that is compulsory to be there and apart from this we can send any other data as per the case
+
 // Action creator
 export function addMovies (movies){
     return {
@@ -55,7 +57,7 @@ export function addMovieToList (movie){
 export function handleMovieSearch (movie) {
     const  url = `http://www.omdbapi.com/?apikey=3ca5df7&t=${movie}`;
 
-    //  this is how we fetch somthing from the server using fetch(), this method basically is asynchrounous and Action creator should be synchronous and return Object
+    //  this is how we fetch something from the server using fetch(), this method basically is asynchrounous and Action creator should be synchronous and return Object
     //  function returns a promise.
     
     // fetch(url)

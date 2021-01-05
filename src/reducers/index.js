@@ -15,6 +15,7 @@ import { ADD_MOVIES,
         ADD_FAVOURITE,
         UN_FAVOURITE,
         SHOW_FAVOURITE,
+        ADD_MOVIE_TO_LIST,
         ADD_SEARCH_RESULT
     }
     from '../actions';
@@ -61,6 +62,11 @@ export function movies(state = initialMovieState, action){
                 ...state,
                 showFavourite: action.val
             }
+        case ADD_MOVIE_TO_LIST:
+            return{
+                ...state,
+                list: [action.movie, ...state.list]
+            };
         default:
             return state
     }
@@ -75,24 +81,26 @@ export function search (state = initialSearchState, action){
     // console.log("SEARCH REDUCER");
     switch (action.type) {
         case ADD_SEARCH_RESULT:
+            console.log(action.movie);
             return{ 
             ...state,
             result : action.movie,
             showSearchResults: true
             }
-            
-            
-    
+        case ADD_MOVIE_TO_LIST:
+            return{
+                ...state,
+                showSearchResults: false
+            };
         default:
             return state
     }
-    return state;
 }
 
-const initialRootReducer = {
-    movies: initialMovieState,
-    search: initialSearchState
-}
+// const initialRootReducer = {
+//     movies: initialMovieState,
+//     search: initialSearchState
+// }
 
 
 // when the dispatch() called then rootReducer will be called automatically and both reducer(movie and search) reducer will be called.

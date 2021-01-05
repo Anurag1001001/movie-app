@@ -12,6 +12,7 @@ console.log('storeContext');
 
 class App extends React.Component{
   componentDidMount(){
+    //  Note When the dispatch() called immedietly subscribe() gets called and update the component
     // make api call
      const {store} = this.props;
 
@@ -25,6 +26,7 @@ class App extends React.Component{
     store.dispatch(addMovies(data));
     console.log('state', this.props.store.getState());
   }
+
   isMovieFavourite = (movie) =>{
     const { movies } = this.props.store.getState();
 

@@ -2,6 +2,7 @@ import React from 'react';
 // import {result} from '../result';
 
 import {addMovieToList,handleMovieSearch} from '../actions'; 
+import {storeContext} from '../index';
 
 
 class Navbar extends React.Component {
@@ -31,12 +32,13 @@ class Navbar extends React.Component {
         });
     }
     render(){
-        const {result:movie, showSearchResults} = this.props.search
+        const {result:movie, showSearchResults} = this.props.search;
         return (
             <div className='nav'>
                 <div className="search-container">
+                    {/* onChange is a function that basically activate if some change happens */}
                     <input onChange = {this.handleChange} />
-                    <button id="search-btn">Search</button>
+                    <button id="search-btn" onClick ={this.handleSearch}>Search</button>
                     
                     { showSearchResults &&
                         <div className =" search-results">
@@ -65,7 +67,7 @@ class NavWrapper extends React.Component{
     render(){
         return(
             <storeContext.Consumer>
-                {(store) => <NavWrapper dispatch={store.dispatch} search={this.props.search}/>}
+                {(store) => <Navbar dispatch={store.dispatch} search={this.props.search}/>}
             </storeContext.Consumer>
         )
 

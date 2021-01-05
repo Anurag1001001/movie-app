@@ -3,6 +3,7 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 // then import File import
 import './index.css';
@@ -45,15 +46,21 @@ const logger = ({dispatch, getState}) => (next) => (action) =>{
 }
 
 // middleware
-const thunk = ({dispatch, getState}) => (next) => (action) =>{
-  if(typeof action === 'function'){
-    //  first go to action - index.js and read all comments of handleMovieSearch()
-    // now this middleware is helping us to dispatch(to the reducer) an action when it get the action type as function 
-    action(dispatch);
-    return;
-  }
-  next(action);
-}
+
+// { READ ALL COMMENTS}
+
+//  We don't need to create thunk middleware redux give us the thunk middleware we just need to install it and use it 
+
+// const thunk = ({dispatch, getState}) => (next) => (action) =>{
+//   if(typeof action === 'function'){
+//     //  first go to action - index.js and read all comments of handleMovieSearch()
+//     // now this middleware is helping us to pass dispatch as an agrument to the action whose type(returned function) is function so that we can again dispatch the action in to the reducers. 
+    
+//     action(dispatch);
+//     return;
+//   }
+//   next(action);
+// }
 
 
 
@@ -64,15 +71,19 @@ const thunk = ({dispatch, getState}) => (next) => (action) =>{
 const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 console.log('store',  store);
 
-const storeContext = createContext();
+export const storeContext = createContext();
+
+
 
 class Provider extends React.Component{
   render(){
     const {store} = this.props;
-    return <storeContext.Provider value = {store}>
-      {/* I want to render everything b/w Provider or you can say all the children of Provider i'll call them here */}
-      {this.props.children}
-    </storeContext.Provider>
+    return( 
+      <storeContext.Provider value = {store}>
+        {/* I want to render everything b/w Provider or you can say all the children of Provider i'll call them here */}
+        {this.props.children}
+      </storeContext.Provider>
+    );
   }
   
 }
@@ -88,12 +99,11 @@ class Provider extends React.Component{
 
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       {/* Why i did like this ? so that App and all it desendant get the access of store */}
       <App/>
       {/* Now anything b/w Provider is the children of Provider class and 'store' will be available to all the desendant */}
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
+ 
   document.getElementById('root')
 );

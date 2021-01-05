@@ -58,7 +58,7 @@ export function handleMovieSearch (movie) {
     const  url = `http://www.omdbapi.com/?apikey=3ca5df7&t=${movie}`;
 
     //  this is how we fetch something from the server using fetch(), this method basically is asynchrounous and Action creator should be synchronous and return Object
-    //  function returns a promise.
+    // fetch() function returns a promise here.
     
     // fetch(url)
     // .then(response => response.json() );
@@ -70,16 +70,21 @@ export function handleMovieSearch (movie) {
 
     // Our this function (Action creator) are not returning anything but all earlier action creator were returning an object, so i need to do two thing first i should return something and reache to reducer and second thing is to store search result to the store and this can be happen by reducer.
 
-    // So what i'm gonna do here is returning a function(above all action creator were return an object where action type defined) and do something to the reducer side so that it can handle 'returned function' and object simultaneouly (bascially based on  return type). Yes we're gon do middleware there, middlwware will be called just after when we dispatched the action and before it reaches to the reducer(go to index.js where i've created a middleware thunk) 
+    // So what i'm gonna do here is returning a function(here we're returning function but earlier  above all action creator were returning an object where action type defined) and do something to the reducer side so that it can handle 'returned function' and object simultaneouly (bascially based on  return type). Yes we're gon do middleware there, middlwware will be called just after when we dispatched the action and before it reaches to the reducer(go to index.js where i've created a middleware thunk) 
     // i'm gonna wrap the upper code into the function like this
+
+    // wait one more thing why i'm returning function here ? because fetch function were returing promise and we didn't have access of dispatch() so we wrapped all code inside function and gave access to dispatch().
+    // and this dispatch argument is coming from thunk where i did check if(typeOf action === function) return action(dispatch).
     
     return function (dispatch){
+       
         fetch(url)
         .then(response => response.json())
         .then(movie => {
             console.log('movie', movie);
 
             // dispatch an action
+          
             dispatch(addMovieSearchResult(movie));
         })
     }

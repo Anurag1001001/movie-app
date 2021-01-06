@@ -75,18 +75,18 @@ export const storeContext = createContext();
 
 
 
-class Provider extends React.Component{
-  render(){
-    const {store} = this.props;
-    return( 
-      <storeContext.Provider value = {store}>
-        {/* I want to render everything b/w Provider or you can say all the children of Provider i'll call them here */}
-        {this.props.children}
-      </storeContext.Provider>
-    );
-  }
+// class Provider extends React.Component{
+//   render(){
+//     const {store} = this.props;
+//     return( 
+//       <storeContext.Provider value = {store}>
+//         {/* I want to render everything b/w Provider or you can say all the children of Provider i'll call them here */}
+//         {this.props.children}
+//       </storeContext.Provider>
+//     );
+//   }
   
-}
+// }
 
 
 // START START START START START STARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTART
@@ -184,6 +184,8 @@ export function connect(callback) {
     return ConnectedComponentWrapper;
   };
 }
+
+// Finally we don't need to write these things(provide, consumer  and connect() ) in any react application, there is a package react-redux that do all these things for us just install it and use it(don't need to make any changes in app.js , navbar, except import connect from react-redux rather than index)
 
 
 

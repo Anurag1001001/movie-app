@@ -2,7 +2,7 @@ import React from 'react';
 // import {result} from '../result';
 
 import {addMovieToList,handleMovieSearch} from '../actions'; 
-import {storeContext} from '../index';
+import {connect} from '../index';
 
 
 class Navbar extends React.Component {
@@ -63,15 +63,23 @@ class Navbar extends React.Component {
     }
 }
 
-class NavWrapper extends React.Component{
-    render(){
-        return(
-            <storeContext.Consumer>
-                {(store) => <Navbar dispatch={store.dispatch} search={this.props.search}/>}
-            </storeContext.Consumer>
-        )
+// class NavWrapper extends React.Component{
+//     render(){
+//         return(
+//             <storeContext.Consumer>
+//                 {(store) => <Navbar dispatch={store.dispatch} search={this.props.search}/>}
+//             </storeContext.Consumer>
+//         )
 
-    }
+//     }
+// }
+
+// Rather than writing state i wrote search basically i'm destructuring search here(using ES6 feature).
+// root state me he toh h search ka state, so directly maine destructure kr liya.
+
+function mapStateToprops({search}){
+    return{
+        search
+    };
 }
-
-export default NavWrapper;
+export default connect(mapStateToprops)(NavWrapper);

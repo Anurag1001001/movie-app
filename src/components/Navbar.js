@@ -82,4 +82,4 @@ function mapStateToprops({search}){
         search
     };
 }
-export default connect(mapStateToprops)(NavWrapper);
+export default connect(mapStateToprops)(Navbar);

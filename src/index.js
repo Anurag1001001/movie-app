@@ -75,18 +75,18 @@ export const storeContext = createContext();
 
 
 
-// class Provider extends React.Component{
-//   render(){
-//     const {store} = this.props;
-//     return( 
-//       <storeContext.Provider value = {store}>
-//         {/* I want to render everything b/w Provider or you can say all the children of Provider i'll call them here */}
-//         {this.props.children}
-//       </storeContext.Provider>
-//     );
-//   }
+class Provider extends React.Component{
+  render(){
+    const {store} = this.props;
+    return( 
+      <storeContext.Provider value = {store}>
+        {/* I want to render everything b/w Provider or you can say all the children of Provider i'll call them here */}
+        {this.props.children}
+      </storeContext.Provider>
+    );
+  }
   
-// }
+}
 
 
 // START START START START START STARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTART

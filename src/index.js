@@ -87,14 +87,106 @@ class Provider extends React.Component{
   }
   
 }
-// console.log('Before state',  store.getState());
 
-// store.dispatch({
-//   type: 'ADD_MOVIES',
-//   movies:[{name: 'superman'}]
-// });
 
-// console.log('After state',  store.getState());
+// START START START START START STARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTARTSTART
+
+
+// Before implementing connect() function some key point i should keep in mind this connect() will return a brand new component which have access to some properties they need from store. 2nd thing is whenever something changes to the state or properties this particular component should get to know that some change happens and get rerender means that we have to call subscribe method inside componentDidMount and we should also unsubscribe this event in componentWillUnMount so that our app will not get heavy.
+
+// const connectedAppComponent = connect(callback)(App);
+
+// export function connect(callback){
+//   return function (Component){
+//     // because this connect() will return new component so we're gonna make new component here.
+//     return class connectedComponent extends React.Component{
+//       // when some change happens then it should rerender our component for that i should subscribe to the store
+//       constructor (props){
+//         super(props);
+//         this.props.store.subscribe(() => this.forceUpdate());
+//       //  before reading constructor comment first go through all comments. 
+//       // Again there is problem here we don't have access of store over here, in constructor we've access inside 'storeContext.Consumer' bcos of 'storeContext.Consumer'.
+//       // so the solution is to wrap this 'connectedComponent'
+
+//       }
+
+//       render(){
+//         return(
+//           // this should return our 'Component' which are passed to connect() so we can write like this <Component />.
+//           // but returned component should have access of store properties which it need so we've to pass those properties as props to the Component.
+//           <storeContext.Consumer>
+//             {(store) => {
+//               const state = store.getState();
+//               const dataToBePassedAsProps = callback(state);
+//               return (
+//                 <Component
+//                   {...dataToBePassedAsProps}
+//                   dispatch = {store.dispatch} 
+//                 />
+//                 // dispatch by default pass hota hai
+//               );
+//             }}
+//           </storeContext.Consumer>
+//         )
+//       }
+//     }
+//   }
+// }
+
+// END END END END ENDEND END ENDEND END ENDENDENDENDENDENDENDENDENDEND
+
+
+
+//  Before heading to this first read all the codes and comments from START to END .
+
+// const connectedComponent = connect(callback)(App);
+export function connect(callback) {
+  return function (Component) {
+  // because this connect() will return new component so we're gonna make new component here.
+    class ConnectedComponent extends React.Component {
+    // when some change happens then it should rerender our component for that i should subscribe to the store.
+      constructor(props) {
+        super(props);
+        this.unsubscribe = this.props.store.subscribe(() => {
+          this.forceUpdate();
+        });
+      //  before reading constructor comment first go through all comments. 
+      // Again there is problem here we don't have access of store over here, in constructor we've access inside 'storeContext.Consumer' bcos of 'storeContext.Consumer'.
+      // so the solution is to wrap this 'connectedComponent'
+
+      }
+
+      componentWillUnmount() {
+      //  when this particular component destroyed then this unsubscribe() function will be called so that memory gets free  
+        this.unsubscribe();
+      }
+      render() {
+        const { store } = this.props;
+        const state = store.getState();
+        const dataToBeSentAsProps = callback(state);
+
+        return <Component dispatch={store.dispatch} {...dataToBeSentAsProps} />;
+      // dispatch by default pass hota hai
+      }
+    }
+
+    class ConnectedComponentWrapper extends React.Component {
+      render() {
+        return (
+          <storeContext.Consumer>
+            {(store) => {
+              return <ConnectedComponent store={store} />;
+            }}
+          </storeContext.Consumer>
+        );
+      }
+    }
+    return ConnectedComponentWrapper;
+  };
+}
+
+
+
 
 
 

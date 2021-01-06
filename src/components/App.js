@@ -6,29 +6,28 @@ import {data} from '../data';
 import Navbar from './Navbar';
 import MovieCard from './MovieCard';
 import {addMovies, showFavourite} from '../actions';
-import {storeContext} from '../index';
-console.log('storeContext');
+import {connect} from '../index';
 
 
 class App extends React.Component{
   componentDidMount(){
     //  Note When the dispatch() called immedietly subscribe() gets called and update the component
     // make api call
-     const {store} = this.props;
+    //  const {store} = this.props;
 
     //  subsvribe
-    store.subscribe(() =>{
-      console.log('Updated');
-      // we shouldn't use forceUpdate() in our application, just for the understanding purpose we did this 
-      this.forceUpdate();
-    })
+    // store.subscribe(() =>{
+    //   console.log('Updated');
+    //   // we shouldn't use forceUpdate() in our application, just for the understanding purpose we did this 
+    //   this.forceUpdate();
+    // })
     // dispatch action
-    store.dispatch(addMovies(data));
-    console.log('state', this.props.store.getState());
+    this.props.dispatch(addMovies(data));
+    console.log('state', this.props);
   }
 
   isMovieFavourite = (movie) =>{
-    const { movies } = this.props.store.getState();
+    const { movies } = this.props;
 
     const index = movies.favourites.indexOf(movie);
 
@@ -40,12 +39,12 @@ class App extends React.Component{
   }
 
   onChangeTab = (val) =>{
-    this.props.store.dispatch(showFavourite(val));
+    this.props.dispatch(showFavourite(val));
   }
   render(){
-    const {movies, search} = this.props.store.getState(); // {movies: movies(), search: search()}
+    const {movies, search} = this.props // {movies: movies(), search: search()}
     const {list, favourites, showFavourite} = movies;
-    console.log('RENDER', this.props.store.getState());
+    console.log('RENDER', this.props);
     const showMovie = showFavourite ? favourites : list ;
     
     return (
@@ -61,7 +60,7 @@ class App extends React.Component{
               <MovieCard
                  movie ={movie}
                  key= {`movies-${index}`}
-                 dispatch = {this.props.store.dispatch}
+                 dispatch = {this.props.dispatch}
                  isFavourite = {this.isMovieFavourite(movie)} />
             ))}
           </div>
@@ -83,7 +82,7 @@ class App extends React.Component{
   
 // }
 
-function callback(state){
+function mapStateToProps(state){
   // 'state' argument in callback function is 'the root state of redux which redux is holding'. 
   // whatever data we want from redux store  and to have access to 'passed' component we'll pass here.
   return {
@@ -94,7 +93,7 @@ function callback(state){
 
 // the second argument of connect() method tells that 'this particular component wants to connect to the redux store basically we pass that component that we want to be connected to redux store'. 
 // bydefault dispatch() pass to component internally to the component that are passed to the connect() method to be connected to the store. So here  dispatch() is being passed to App component interally by default. 
-const connectedAppComponent = connect(callback)(App);
+const connectedAppComponent = connect(mapStateToProps)(App);
 
 //  One more thing i want to tell here is earlier we were using storeContext.Provider to provide access to the store and by doing this all the desendant of Component will get the access of store(by using storeContext.Consumer) the problem with this approach is this, when our store gets updated then all the desendant component will rerender() and ye fark nhi padta ki unn component ka data change hua h ya nhi agr store update hota h to saare desendant component rerender honge.
 

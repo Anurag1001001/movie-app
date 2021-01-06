@@ -72,15 +72,35 @@ class App extends React.Component{
 }
 
 
-class AppWrapper extends React.Component{
-  render(){
-    return (
-      <storeContext.Consumer>
-        {(store) => <App store ={store} />}
-      </storeContext.Consumer>
-    )
-  }
+// class AppWrapper extends React.Component{
+//   render(){
+//     return (
+//       <storeContext.Consumer>
+//         {(store) => <App store ={store} />}
+//       </storeContext.Consumer>
+//     )
+//   }
   
+// }
+
+function callback(state){
+  // 'state' argument in callback function is 'the root state of redux which redux is holding'. 
+  // whatever data we want from redux store  and to have access to 'passed' component we'll pass here.
+  return {
+    movies: state.movies,
+    search: state.search
+  }
 }
 
-export default AppWrapper;
+// the second argument of connect() method tells that 'this particular component wants to connect to the redux store basically we pass that component that we want to be connected to redux store'. 
+// bydefault dispatch() pass to component internally to the component that are passed to the connect() method to be connected to the store. So here  dispatch() is being passed to App component interally by default. 
+const connectedAppComponent = connect(callback)(App);
+
+//  One more thing i want to tell here is earlier we were using storeContext.Provider to provide access to the store and by doing this all the desendant of Component will get the access of store(by using storeContext.Consumer) the problem with this approach is this, when our store gets updated then all the desendant component will rerender() and ye fark nhi padta ki unn component ka data change hua h ya nhi agr store update hota h to saare desendant component rerender honge.
+
+// But with this apporach where we are connecting each component to the store via connect() method, and agr inke state change hote h tb ye component rerender honge warna nhi honge.
+
+
+
+
+export default connectedAppComponent;

@@ -1,3 +1,94 @@
+# MovieCard(Video Link): https://cutt.ly/CkgQOaf
+
+A Movie Card application build on using REACT JS, REDUX.
+In this application i can see all my favourite list of movie and unfavourite one, also i can search any movie and put that to favourite list or unfavourite list as per interest. I have used imdb api to search movie and add them to bucket list.
+It is the first mini project i built while learning react js.
+
+## Tools ans libraries used
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width=200><img src="https://everyday.codes/wp-content/uploads/2020/01/0-U2DmhXYumRyXH6X1.png" width=125><img src="https://img-a.udemycdn.com/course/750x422/1934362_ca3c.jpg" width=200><img src="https://vegibit.com/wp-content/uploads/2018/07/JSON-Web-Token-Authentication-With-Node.png" width=200><img src="https://ourcodeworld.com/public-media/articles/articleocw-562bb367bbee4.png" width=200>
+
+1. React
+2. redux
+
+## Features and Screenshots
+
+### 1.Favourite List
+
+<img src="" width=500>
+
+### 2.Unfavourite List
+
+<img src="" width=500>
+
+### 3. Searched movie
+
+<img "" width=500>
+
+### 4. Added searched movie to list
+
+<img src="" width=500>
+
+## File Structure
+
+```
+src
+│   chat.css
+│   index.css
+│   index.js
+│   website logo.png
+│
+├───actions<br>
+│       actionTypes.js
+│       auth.js
+│       friends.js
+│       posts.js
+│       profile.js
+│       search.js
+│
+├───components
+│       App.js
+│       Chat.js
+│       Comment.js
+│       CreatePost.js
+│       FriendsList.js
+│       FriendsListItem.js
+│       Home.js
+│       index.js
+│       Login.js
+│       Navbar.js
+│       Page404.js
+│       Post.js
+│       PostsList.js
+│       Settings.js
+│       Signup.js
+│       UserProfile.js
+│
+├───helpers
+│       urls.js
+│       utils.js
+│
+├───images
+│       1.PNG
+│       2.PNG
+│       3.PNG
+│       4.PNG
+│       5.PNG
+│       6.PNG
+│       7.PNG
+│
+├───reducers
+│       auth.js
+│       friends.js
+│       index.js
+│       posts.js
+│       profile.js
+│       search.js
+│
+└───store
+        index.js
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

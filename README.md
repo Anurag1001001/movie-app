@@ -6,7 +6,7 @@ It is the first mini project i built while learning react js.
 
 ## Tools ans libraries used
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width=200><img src="https://everyday.codes/wp-content/uploads/2020/01/0-U2DmhXYumRyXH6X1.png" width=125><img src="https://img-a.udemycdn.com/course/750x422/1934362_ca3c.jpg" width=200><img src="https://vegibit.com/wp-content/uploads/2018/07/JSON-Web-Token-Authentication-With-Node.png" width=200><img src="https://ourcodeworld.com/public-media/articles/articleocw-562bb367bbee4.png" width=200>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" width=200><img src="https://everyday.codes/wp-content/uploads/2020/01/0-U2DmhXYumRyXH6X1.png" width=125>
 
 1. React
 2. redux
@@ -15,19 +15,19 @@ It is the first mini project i built while learning react js.
 
 ### 1.Favourite List
 
-<img src="" width=500>
+<img src="https://github.com/Anurag1001001/movie-app/blob/main/src/images/1.PNG" width=500>
 
 ### 2.Unfavourite List
 
-<img src="" width=500>
+<img src="https://github.com/Anurag1001001/movie-app/blob/main/src/images/2.PNG" width=500>
 
 ### 3. Searched movie
 
-<img "" width=500>
+<img "https://github.com/Anurag1001001/movie-app/blob/main/src/images/3.PNG" width=500>
 
 ### 4. Added searched movie to list
 
-<img src="" width=500>
+<img src="https://github.com/Anurag1001001/movie-app/blob/main/src/images/4.PNG" width=500>
 
 ## File Structure
 

@@ -23,7 +23,7 @@ It is the first mini project i built while learning react js.
 
 ### 3. Searched movie
 
-<img "https://github.com/Anurag1001001/movie-app/blob/main/src/images/3.PNG" width=500>
+<img src="https://github.com/Anurag1001001/movie-app/blob/main/src/images/3.PNG" width=500>
 
 ### 4. Added searched movie to list
 
